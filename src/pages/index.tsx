@@ -3,6 +3,7 @@ import { db } from "@/firebasae";
 import { Message } from "@/types";
 import { useUser } from "@/contexts/userContext";
 import firebase from "@/firebasae";
+import { Button } from "@material-ui/core";
 
 type Props = {
   message: Message;
@@ -25,21 +26,19 @@ const IndexPage: NextPage<Props> = ({ message }: Props) => {
         <span>loading now...</span>
       </>
     );
-  } else if (user) {
-    return (
-      <>
-        <h1>{message.title}</h1>
-        <span>{message.body}</span>
-        <button onClick={logout}>logout</button>
-        {user.uid}
-      </>
-    );
   }
   return (
     <>
+      <Button variant="contained" color="primary">
+        Hello World
+      </Button>
       <h1>{message.title}</h1>
       <span>{message.body}</span>
-      <button onClick={login}>login</button>
+      {user ? (
+        <button onClick={logout}>logout</button>
+      ) : (
+        <button onClick={login}>login</button>
+      )}
     </>
   );
 };
